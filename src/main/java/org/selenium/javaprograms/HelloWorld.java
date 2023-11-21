@@ -1,4 +1,4 @@
-package org.selenium;
+package org.selenium.javaprograms;
 
 public class HelloWorld {
     public static void main(String[] args) {
