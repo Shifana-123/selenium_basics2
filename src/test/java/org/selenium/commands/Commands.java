@@ -5,7 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Commands extends Base {
+import java.util.List;
+
+public class
+Commands extends Base {
     @Test
     public void verifySwagLabsUserLogin() {
         driver.get("https://www.saucedemo.com/");
@@ -100,22 +103,67 @@ public class Commands extends Base {
         String expectedLoginId = "sshifana959@gmail.com";
         Assert.assertEquals(actualLoginId, expectedLoginId, "User Login Failed");
     }
+
     @Test
     public void verifyDemoWebShopUserLoginUsingCssSelector() {
         driver.get("https://demowebshop.tricentis.com/");
-        WebElement userLoginField=driver.findElement(By.cssSelector("body > div.master-wrapper-page > div.master-wrapper-content > div.header > div.header-links-wrapper > div.header-links > ul > li:nth-child(2) > a"));
+        WebElement userLoginField = driver.findElement(By.cssSelector("body > div.master-wrapper-page > div.master-wrapper-content > div.header > div.header-links-wrapper > div.header-links > ul > li:nth-child(2) > a"));
         userLoginField.click();
-        WebElement emailField=driver.findElement(By.cssSelector("#Email"));
+        WebElement emailField = driver.findElement(By.cssSelector("#Email"));
         emailField.sendKeys("sshifana959@gmail.com");
-        WebElement passWordField=driver.findElement(By.cssSelector("#Password"));
+        WebElement passWordField = driver.findElement(By.cssSelector("#Password"));
         passWordField.sendKeys("Shifana@123");
-        WebElement loginButton= driver.findElement(By.cssSelector("body > div.master-wrapper-page > div.master-wrapper-content > div.master-wrapper-main > div.center-2 > div > div.page-body > div.customer-blocks > div.returning-wrapper > div.form-fields > form > div.buttons > input"));
+        WebElement loginButton = driver.findElement(By.cssSelector("body > div.master-wrapper-page > div.master-wrapper-content > div.master-wrapper-main > div.center-2 > div > div.page-body > div.customer-blocks > div.returning-wrapper > div.form-fields > form > div.buttons > input"));
         loginButton.click();
-        WebElement actualUserLoginElement=driver.findElement(By.cssSelector("body > div.master-wrapper-page > div.master-wrapper-content > div.header > div.header-links-wrapper > div.header-links > ul > li:nth-child(1) > a"));
-        String actualLoginId=actualUserLoginElement.getText();
-        String expectedLoginId="sshifana959@gmail.com";
-        Assert.assertEquals(actualLoginId,expectedLoginId," User Login Failed");
+        WebElement actualUserLoginElement = driver.findElement(By.cssSelector("body > div.master-wrapper-page > div.master-wrapper-content > div.header > div.header-links-wrapper > div.header-links > ul > li:nth-child(1) > a"));
+        String actualLoginId = actualUserLoginElement.getText();
+        String expectedLoginId = "sshifana959@gmail.com";
+        Assert.assertEquals(actualLoginId, expectedLoginId, " User Login Failed");
 
     }
 
+    @Test
+    public void validateTotalNumberOfTags() {
+        driver.get("https://demowebshop.tricentis.com/");
+        List<WebElement> inputTagElements = driver.findElements(By.tagName("Input"));
+        int tagSize = inputTagElements.size();
+        System.out.println(tagSize);
+    }
+
+    @Test
+    public void verifyNavigationCommands() {
+        driver.get("https://demowebshop.tricentis.com/");
+        WebElement register = driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[1]/div[2]/div[1]/ul/li[1]/a"));
+        register.click();
+        driver.navigate().back();
+        driver.navigate().forward();
+        WebElement firstName = driver.findElement(By.xpath("//*[@id=\"FirstName\"]"));
+        firstName.sendKeys("Shifana");
+        WebElement lastName = driver.findElement(By.xpath("//*[@id=\"LastName\"]"));
+        lastName.sendKeys("S");
+        WebElement email = driver.findElement(By.xpath("//*[@id=\"Email\"]"));
+        email.sendKeys("sshifana959@gmail.com");
+        driver.navigate().refresh();
+        driver.navigate().to("https://www.google.co.in/");
+    }
+
+    @Test
+    public void verifyIsSelected() {
+        boolean isMaleSelected;
+        driver.get("https://demowebshop.tricentis.com/register");
+        WebElement maleRadioButton = driver.findElement(By.xpath("//input[@id='gender-male']"));
+        isMaleSelected = maleRadioButton.isSelected(); //Expected result is false
+        Assert.assertFalse(isMaleSelected, "Male radio button is selected");
+        System.out.println("Gender Male Before Selection " + isMaleSelected);
+        maleRadioButton.click();
+        isMaleSelected = maleRadioButton.isSelected();
+        Assert.assertTrue(isMaleSelected, "Male Radio button is not selected");
+        System.out.println("Gender Male After Selection " + isMaleSelected);
+    }
+    @Test
+    public void verifyIsEnabled() {
+        driver.get("https://demowebshop.tricentis.com/");
+        WebElement subscribeButton=driver.findElement(By.xpath("//input[@id='newsletter-subscribe-button']"));
+
+    }
 }
