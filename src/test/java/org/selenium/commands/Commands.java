@@ -2,10 +2,15 @@ package org.selenium.commands;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.selenium.basics.WebElements;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
+import static org.testng.AssertJUnit.assertEquals;
+
 
 public class
 Commands extends Base {
@@ -21,7 +26,7 @@ Commands extends Base {
         WebElement swagLogo = driver.findElement(By.className("app_logo"));
         String actualSwagLogoText = swagLogo.getText();
         String expectedSwagLogoText = "Swag Labs";
-        Assert.assertEquals(actualSwagLogoText, expectedSwagLogoText, "Invalid Logo found in login page");
+        assertEquals(actualSwagLogoText, expectedSwagLogoText, "Invalid Logo found in login page");
 
     }
 
@@ -41,7 +46,7 @@ Commands extends Base {
         String expectedUserLogin = "sshifana959@gmail.com";
 
 
-        Assert.assertEquals(actualUserLogin, expectedUserLogin, "Login Failed");
+        assertEquals(actualUserLogin, expectedUserLogin, "Login Failed");
     }
 
     @Test
@@ -101,7 +106,7 @@ Commands extends Base {
         WebElement actualUserLoginElement = driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[1]/div[2]/div[1]/ul/li[1]/a"));
         String actualLoginId = actualUserLoginElement.getText();
         String expectedLoginId = "sshifana959@gmail.com";
-        Assert.assertEquals(actualLoginId, expectedLoginId, "User Login Failed");
+        assertEquals(actualLoginId, expectedLoginId, "User Login Failed");
     }
 
     @Test
@@ -118,7 +123,7 @@ Commands extends Base {
         WebElement actualUserLoginElement = driver.findElement(By.cssSelector("body > div.master-wrapper-page > div.master-wrapper-content > div.header > div.header-links-wrapper > div.header-links > ul > li:nth-child(1) > a"));
         String actualLoginId = actualUserLoginElement.getText();
         String expectedLoginId = "sshifana959@gmail.com";
-        Assert.assertEquals(actualLoginId, expectedLoginId, " User Login Failed");
+        assertEquals(actualLoginId, expectedLoginId, " User Login Failed");
 
     }
 
@@ -160,10 +165,56 @@ Commands extends Base {
         Assert.assertTrue(isMaleSelected, "Male Radio button is not selected");
         System.out.println("Gender Male After Selection " + isMaleSelected);
     }
+
     @Test
     public void verifyIsEnabled() {
         driver.get("https://demowebshop.tricentis.com/");
-        WebElement subscribeButton=driver.findElement(By.xpath("//input[@id='newsletter-subscribe-button']"));
+        WebElement subscribeButton = driver.findElement(By.xpath("//input[@id='newsletter-subscribe-button']"));
+        boolean isSubscribeButtonEnabled = subscribeButton.isEnabled();
+        Assert.assertTrue(isSubscribeButtonEnabled, "Subscribe button is not enabled");
+    }
+
+    @Test
+    public void isDisplayed() {
+        driver.get("https://demowebshop.tricentis.com/");
+        WebElement voteButton = driver.findElement(By.xpath("//input[@id='vote-poll-1']"));
+        boolean isButtonDisplayed = voteButton.isDisplayed();
+        Assert.assertTrue(isButtonDisplayed, " Vote Button is not displayed");
+    }
+
+    @Test
+    public void verifyCommunityPoll() {
+        driver.get("https://demowebshop.tricentis.com/");
+        List<WebElement> communityPollElements = driver.findElements(By.xpath("//li[@class='answer']//label[starts-with(@for,'pollanswers')]"));
+        for (WebElement obj : communityPollElements) {
+            String poll = obj.getText();
+            if (poll.equals("Poor")) {
+                obj.click();
+            }
+
+        }
 
     }
+    @Test
+    public void verifyValueSelectFromDropDown() {
+        driver.get("https://demo.guru99.com/test/newtours/register.php");
+        WebElement countryDropDown= driver.findElement(By.xpath("//select[@name='country']"));
+        Select select=new Select(countryDropDown);
+        //select.selectByVisibleText("INDIA");
+        //select.selectByIndex(23);
+        select.selectByValue("AUSTRIA");
+        WebElement firstSelectedOption=select.getFirstSelectedOption();
+        System.out.println(firstSelectedOption.getText());
+    }
+    @Test
+    public void verifyTotalNumberOfDropDownValues() {
+        driver.get("https://demo.guru99.com/test/newtours/register.php");
+        WebElement countryDropDown= driver.findElement(By.xpath("//select[@name='country']"));
+        Select select=new Select(countryDropDown);
+        List<WebElement> dropDownElements=select.getOptions();
+        System.out.println(dropDownElements.size());
+
+    }
+
+
 }
