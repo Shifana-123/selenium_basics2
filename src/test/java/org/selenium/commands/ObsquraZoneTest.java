@@ -46,12 +46,13 @@ public class ObsquraZoneTest extends Base {
         boolean isBoxSelected;
         driver.get("https://selenium.obsqurazone.com/check-box-demo.php");
         WebElement singleCheckBox = driver.findElement((By.xpath("//input[@id='gridCheck']")));
-        isBoxSelected= singleCheckBox.isSelected();
-        Assert.assertFalse(isBoxSelected,"Check box is selected");
+        isBoxSelected = singleCheckBox.isSelected();
+        Assert.assertFalse(isBoxSelected, "Check box is selected");
         singleCheckBox.click();
         isBoxSelected = singleCheckBox.isSelected();
         Assert.assertTrue(isBoxSelected, "Check box is not selected");
     }
+
     @Test
     public void verifyRadioButtonDemo() {
         boolean isButtonSelected;
@@ -103,47 +104,64 @@ public class ObsquraZoneTest extends Base {
 
 
     }
+
     @Test
     public void verifyColorSelectFromDropDown() {
         driver.get("https://selenium.obsqurazone.com/select-input.php");
-        WebElement colourDropDown= driver.findElement(By.xpath("//select[@class='form-control']"));
-        Select select=new Select(colourDropDown);
+        WebElement colourDropDown = driver.findElement(By.xpath("//select[@class='form-control']"));
+        Select select = new Select(colourDropDown);
         select.selectByIndex(3);
-        WebElement colorSelected= select.getFirstSelectedOption();
-        WebElement messageField=driver.findElement(By.xpath("//div[@id='message-one']"));
-        String actualResult=messageField.getText();
-        String expectedResult="Selected Color : Green";
-        assertEquals(actualResult,expectedResult,"No color selected");
+        WebElement colorSelected = select.getFirstSelectedOption();
+        WebElement messageField = driver.findElement(By.xpath("//div[@id='message-one']"));
+        String actualResult = messageField.getText();
+        String expectedResult = "Selected Color : Green";
+        assertEquals(actualResult, expectedResult, "No color selected");
     }
+
     @Test
     public void verifyTotalNumberOfValuesInDropDown() {
         driver.get("https://selenium.obsqurazone.com/select-input.php");
-        WebElement colourDropDown= driver.findElement(By.xpath("//select[@class='form-control']"));
-        Select select=new Select(colourDropDown);
-        List<WebElement> dropDownSize=select.getOptions();
-        int actualResult= dropDownSize.size();
-        int expectedResult=4;
-        assertEquals(actualResult,expectedResult,"Invalid size");
+        WebElement colourDropDown = driver.findElement(By.xpath("//select[@class='form-control']"));
+        Select select = new Select(colourDropDown);
+        List<WebElement> dropDownSize = select.getOptions();
+        int actualResult = dropDownSize.size();
+        int expectedResult = 4;
+        assertEquals(actualResult, expectedResult, "Invalid size");
     }
+
     @Test
     public void verifyValuesInColorSelectDropDown() {
         driver.get("https://selenium.obsqurazone.com/select-input.php");
-        WebElement colourDropDown= driver.findElement(By.xpath("//select[@class='form-control']"));
-        Select select=new Select(colourDropDown);
-        List<WebElement> element=select.getOptions();
-        List<String> actual=new ArrayList<>();
-        for(WebElement e:element)
-        {
-            String colors=e.getText();
+        WebElement colourDropDown = driver.findElement(By.xpath("//select[@class='form-control']"));
+        Select select = new Select(colourDropDown);
+        List<WebElement> element = select.getOptions();
+        List<String> actual = new ArrayList<>();
+        for (WebElement e : element) {
+            String colors = e.getText();
             actual.add(colors);
         }
-        List<String> expected=new ArrayList<>();
+        List<String> expected = new ArrayList<>();
         expected.add("-- Select --");
         expected.add("Red");
         expected.add("Yellow");
         expected.add("Green");
-        assertEquals(actual,expected,"Invalid selection");
+        assertEquals(actual, expected, "Invalid selection");
 
+    }
+
+    @Test
+    public void verifyDropDownWithoutSelect() {
+        driver.get("https://selenium.obsqurazone.com/jquery-select.php");
+        WebElement stateDropDown=driver.findElement(By.xpath("//span[@class='select2-selection select2-selection--single']//span[@class='select2-selection__arrow']"));
+        stateDropDown.click();
+        List<WebElement> DropDownWithoutSelect = driver.findElements(By.xpath("//li[contains(@class,'select2-results__option select2-results__option--selectable')]"));
+        for (WebElement dropDownValueElements :DropDownWithoutSelect ) {
+           String selectedState = dropDownValueElements.getText();
+            if (selectedState.equals("California")) {
+                dropDownValueElements.click();
+                break;
+            }
+        }
     }
 
 }

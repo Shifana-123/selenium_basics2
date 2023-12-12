@@ -1,5 +1,6 @@
 package org.selenium.commands;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -195,24 +196,85 @@ Commands extends Base {
         }
 
     }
+
     @Test
     public void verifyValueSelectFromDropDown() {
         driver.get("https://demo.guru99.com/test/newtours/register.php");
-        WebElement countryDropDown= driver.findElement(By.xpath("//select[@name='country']"));
-        Select select=new Select(countryDropDown);
+        WebElement countryDropDown = driver.findElement(By.xpath("//select[@name='country']"));
+        Select select = new Select(countryDropDown);
         //select.selectByVisibleText("INDIA");
         //select.selectByIndex(23);
         select.selectByValue("AUSTRIA");
-        WebElement firstSelectedOption=select.getFirstSelectedOption();
+        WebElement firstSelectedOption = select.getFirstSelectedOption();
         System.out.println(firstSelectedOption.getText());
     }
+
     @Test
     public void verifyTotalNumberOfDropDownValues() {
         driver.get("https://demo.guru99.com/test/newtours/register.php");
-        WebElement countryDropDown= driver.findElement(By.xpath("//select[@name='country']"));
-        Select select=new Select(countryDropDown);
-        List<WebElement> dropDownElements=select.getOptions();
+        WebElement countryDropDown = driver.findElement(By.xpath("//select[@name='country']"));
+        Select select = new Select(countryDropDown);
+        List<WebElement> dropDownElements = select.getOptions();
         System.out.println(dropDownElements.size());
+
+    }
+
+    @Test
+    public void verifyMultiSelectDropDown() {
+        driver.get("https://www.tutorialspoint.com/selenium/selenium_automation_practice.htm");
+        WebElement multiSelect = driver.findElement(By.xpath("//select[@name='selenium_commands']"));
+        Select select = new Select(multiSelect);
+        boolean selectedValue = select.isMultiple();
+        System.out.println(selectedValue);
+        select.selectByVisibleText("Browser Commands");
+        select.selectByVisibleText("Switch Commands");
+        List<WebElement> selectedValues = select.getAllSelectedOptions();
+        for (WebElement e : selectedValues) {
+            System.out.println(e.getText());
+        }
+        select.deselectByVisibleText("Switch Commands");
+    }
+
+    @Test
+    public void verifyFileUpload() {
+        driver.get("https://demo.guru99.com/test/upload/");
+        WebElement chooseFileField = driver.findElement(By.xpath("//input[@type='file']"));
+        chooseFileField.sendKeys("C:\\Users\\shifa\\IdeaProjects\\selenium_basics\\src\\main\\resources\\Selenium.docx");
+        WebElement acceptField = driver.findElement(By.xpath("//input[@type='checkbox']"));
+        acceptField.click();
+        WebElement submitField = driver.findElement(By.xpath("//button[@type='button']"));
+        submitField.click();
+    }
+
+    @Test
+    public void verifyTextInSubscribeButton() {
+        driver.get("https://demowebshop.tricentis.com/");
+        WebElement subscribeButton = driver.findElement(By.id("newsletter-subscribe-button"));
+        String subscribeButtonText = subscribeButton.getAttribute("value");
+        String expectedText = "Subscribe";
+        Assert.assertEquals(subscribeButtonText, expectedText, "Invalid Text Found in Subscribe Button");
+    }
+
+    @Test
+    public void validateSimpleAlert() {
+        driver.get("https://demoqa.com/alerts");
+        WebElement clickButton = driver.findElement(By.id("alertButton"));
+        clickButton.click();
+        Alert alert = driver.switchTo().alert();
+        String alertText = alert.getText();
+        System.out.println(alertText);
+        alert.accept();
+    }
+    @Test
+    public void validateConfirmationAlert() {
+        driver.get("https://demoqa.com/alerts");
+        WebElement clickMeButton=driver.findElement(By.id("confirmButton"));
+        clickMeButton.click();
+        Alert alert=driver.switchTo().alert();
+        alert.dismiss();
+        WebElement messageField=driver.findElement(By.id("confirmResult"));
+        String expectedText="You selected Cancel";
+        Assert.assertEquals(alertText,expectedText,"Invalid Selection");
 
     }
 
