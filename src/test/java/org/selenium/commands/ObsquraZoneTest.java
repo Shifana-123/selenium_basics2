@@ -1,5 +1,6 @@
 package org.selenium.commands;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -149,19 +150,23 @@ public class ObsquraZoneTest extends Base {
 
     }
 
+
+
     @Test
-    public void verifyDropDownWithoutSelect() {
-        driver.get("https://selenium.obsqurazone.com/jquery-select.php");
-        WebElement stateDropDown=driver.findElement(By.xpath("//span[@class='select2-selection select2-selection--single']//span[@class='select2-selection__arrow']"));
-        stateDropDown.click();
-        List<WebElement> DropDownWithoutSelect = driver.findElements(By.xpath("//li[contains(@class,'select2-results__option select2-results__option--selectable')]"));
-        for (WebElement dropDownValueElements :DropDownWithoutSelect ) {
-           String selectedState = dropDownValueElements.getText();
-            if (selectedState.equals("California")) {
-                dropDownValueElements.click();
-                break;
-            }
-        }
+    public void verifyCustomerDelete() {
+        driver.get("https://demo.guru99.com/test/delete_customer.php");
+        WebElement customerIdField= driver.findElement(By.xpath("//input[@name='cusid']"));
+        customerIdField.sendKeys("3");
+        WebElement submitButton= driver.findElement(By.xpath("//input[@name='submit']"));
+        submitButton.click();
+        Alert alert=driver.switchTo().alert();
+        String firstAlertText= alert.getText();
+        System.out.println(firstAlertText);
+        alert.accept();
+        String secondAlertText=alert.getText();
+        System.out.println(secondAlertText);
+        alert.accept();
+
     }
 
 }
