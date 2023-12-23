@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class ObsquraZoneTest extends Base {
+public class ObsquraZoneTest extends BrowserLaunch {
     @Test
     public void verifySingleInputField() {
         driver.get("https://selenium.obsqurazone.com/simple-form-demo.php");
