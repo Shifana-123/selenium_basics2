@@ -9,13 +9,32 @@ import org.selenium.automationcore.Base;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class HomePageTest extends Base {
     @Test
     public void verifyHomePageTitle() {
-        WebDriver driver = new ChromeDriver();
-        WebElement pageTitle=driver.findElement(By.xpath("//img[@alt='Tricentis Demo Web Shop']"));
-        String actualTitle= driver.getTitle();
-        String expectedTitle="Tricentis Demo Web Shop";
-        Assert.assertEquals(actualTitle,expectedTitle,"Invalid Title");
+        String actualResult = driver.getTitle();
+        String expectedResult = "Demo Web Shop";
+        Assert.assertEquals(actualResult, expectedResult, "Invalid title");
+
+    }
+
+    @Test
+    public void verifyCommunityPollSelection() {
+        List<WebElement> pollTexts = driver.findElements(By.xpath("//li[@class='answer']//label[starts-with(@for,'pollanswers')]"));
+        for (WebElement values : pollTexts) {
+            String pollValuesTexts = values.getText();
+            if (pollValuesTexts.equals("Poor")) {
+                values.click();
+            }
+                boolean isButtonSelected = values.isSelected();
+                Assert.assertFalse(isButtonSelected, "Value  selected");
+
+            }
+
+
+
     }
 }
+

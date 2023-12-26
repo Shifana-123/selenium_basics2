@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Base {
-    WebDriver driver;
+    public WebDriver driver;
 
     public void initializeBrowser(String browser) {
         if (browser.equals("Chrome")) {
