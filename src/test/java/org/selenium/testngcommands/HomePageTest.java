@@ -28,13 +28,15 @@ public class HomePageTest extends Base {
             if (pollValuesTexts.equals("Poor")) {
                 values.click();
             }
-                boolean isButtonSelected = values.isSelected();
-                Assert.assertFalse(isButtonSelected, "Value  selected");
-
-            }
-
-
+        }
+        WebElement ThirdButton = driver.findElement(By.id("pollanswers-3"));
+        boolean isButtonSelected = ThirdButton.isSelected();
+        Assert.assertTrue(isButtonSelected, "Value  not selected");
 
     }
+
+
+
+
 }
 
