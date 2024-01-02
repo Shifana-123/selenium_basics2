@@ -10,27 +10,20 @@ import org.selenium.utilities.RandomDataUtility;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterPageTest extends Base {
     @Test
     public void verifyRegisterPageTitle() {
-        /*WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));
-        registerField.click();
-        String actualPageTitle = driver.getTitle();
-        String expectedPageTitle = "Demo Web Shop. Register";
-        Assert.assertEquals(actualPageTitle, expectedPageTitle, "Invalid title"); */
-        try {
             WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));
             registerField.click();
             String actualPageTitle = driver.getTitle();
             ArrayList<String> data = ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH, Constants.REGISTRATION_PAGE);
             String expectedResult = data.get(1);
             Assert.assertEquals(actualPageTitle, expectedResult, Messages.TITLE_MISMATCH);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+
     }
 
     @Test
@@ -39,22 +32,6 @@ public class RegisterPageTest extends Base {
         String lastName = RandomDataUtility.getLastName();
         String emailID= firstName+"."+lastName+"123@yahoo.com";
         String password = firstName+"."+lastName;
-        /*WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));
-        registerField.click();
-        WebElement genderSelection = driver.findElement(By.xpath("//div[@class='gender']//label[text()='Female']"));
-        genderSelection.click();
-        WebElement firstNameField = driver.findElement(By.id("FirstName"));
-        firstNameField.sendKeys("Shifana");
-        WebElement lastNameField = driver.findElement(By.id("LastName"));
-        lastNameField.sendKeys("S");
-        WebElement emailField = driver.findElement(By.id("Email"));
-        emailField.sendKeys("sshifana959@gmail.com");
-        WebElement passwordField = driver.findElement(By.id("Password"));
-        passwordField.sendKeys("Shifana@123");
-        WebElement confirmPasswordField = driver.findElement(By.id("ConfirmPassword"));
-        confirmPasswordField.sendKeys("Shifana@123");
-        WebElement registerButton = driver.findElement(By.id("register-button"));
-        registerButton.click(); */
         WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));
         registerField.click();
         WebElement genderSelection = driver.findElement(By.xpath("//div[@class='gender']//label[text()='Female']"));

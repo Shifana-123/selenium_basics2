@@ -23,17 +23,11 @@ import static org.openqa.selenium.remote.http.Message.*;
 public class HomePageTest extends Base {
     @Test
 
-    public void verifyHomePageTitle() throws IOException {
-        try {
+    public void verifyHomePageTitle()  {
             String actualResult = driver.getTitle();
-            ArrayList<String> data = ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH, Constants.HOME_PAGE);
+            ArrayList<String> data = ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH,Constants.HOME_PAGE);
             String expectedResult = data.get(1);
             Assert.assertEquals(actualResult, expectedResult, Messages.TITLE_MISMATCH);
-        }
-        catch (Exception ex)
-        {
-            System.out.println(ex.getMessage());
-        }
 
     }
     @Test
