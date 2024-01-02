@@ -1,5 +1,4 @@
 package org.selenium.testngcommands;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.selenium.automationcore.Base;
@@ -10,28 +9,24 @@ import org.selenium.utilities.RandomDataUtility;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RegisterPageTest extends Base {
     @Test
     public void verifyRegisterPageTitle() {
-            WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));
-            registerField.click();
-            String actualPageTitle = driver.getTitle();
-            ArrayList<String> data = ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH, Constants.REGISTRATION_PAGE);
-            String expectedResult = data.get(1);
-            Assert.assertEquals(actualPageTitle, expectedResult, Messages.TITLE_MISMATCH);
-
+        WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));
+        registerField.click();
+        String actualPageTitle = driver.getTitle();
+        ArrayList<String> data = ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH, Constants.REGISTRATION_PAGE);
+        String expectedResult = data.get(1);
+        Assert.assertEquals(actualPageTitle, expectedResult, Messages.TITLE_MISMATCH);
     }
-
     @Test
     public void verifyUserRegistration() {
         String firstName = RandomDataUtility.getFirstName();
         String lastName = RandomDataUtility.getLastName();
-        String emailID= firstName+"."+lastName+"123@yahoo.com";
-        String password = firstName+"."+lastName;
+        String emailID = firstName + "." + lastName + "123@yahoo.com";
+        String password = firstName + "." + lastName;
         WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));
         registerField.click();
         WebElement genderSelection = driver.findElement(By.xpath("//div[@class='gender']//label[text()='Female']"));

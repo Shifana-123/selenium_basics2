@@ -8,10 +8,7 @@ import org.selenium.constants.Messages;
 import org.selenium.dataprovider.DataProviders;
 import org.selenium.utilities.ExcelUtility;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class LoginPageTest extends Base {
