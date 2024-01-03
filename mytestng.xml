@@ -2,10 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Functional Suite">
     <test name="Regression Test">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="baseURL" value="https://demowebshop.tricentis.com/"/>
         <classes>
             <class name="org.selenium.testngcommands.HomePageTest">
                 <methods>
-                    <exclude name="verifyHomePageTitle"/>
+                    <include name="verifyHomePageTitle"/>
                     <include name="verifyCommunityPollSelection"/>
                 </methods>
             </class>
@@ -18,6 +20,8 @@
         </classes>
     </test>
     <test name="Smoke Test">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="baseURL" value="https://demowebshop.tricentis.com/"/>
         <classes>
             <class name="org.selenium.testngcommands.LoginPageTest">
                 <methods>

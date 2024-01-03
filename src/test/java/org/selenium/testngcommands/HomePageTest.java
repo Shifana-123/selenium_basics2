@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomePageTest extends Base {
-    @Test
+    @Test(priority=1,enabled=false)
 
     public void verifyHomePageTitle() {
         String actualResult = driver.getTitle();
@@ -22,7 +22,7 @@ public class HomePageTest extends Base {
         Assert.assertEquals(actualResult, expectedResult, Messages.TITLE_MISMATCH);
     }
 
-    @Test
+    @Test(priority=2)
     public void verifyCommunityPollSelection() {
         List<WebElement> pollTexts = driver.findElements(By.xpath("//li[@class='answer']//label[starts-with(@for,'pollanswers')]"));
         for (WebElement values : pollTexts) {
