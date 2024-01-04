@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 public class RegisterPageTest extends Base {
-    @Test(priority = 3)
+    @Test(priority = 3,groups = "Smoke")
     public void verifyRegisterPageTitle() {
         WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));
         registerField.click();
@@ -21,7 +21,7 @@ public class RegisterPageTest extends Base {
         String expectedResult = data.get(1);
         Assert.assertEquals(actualPageTitle, expectedResult, Messages.TITLE_MISMATCH);
     }
-    @Test(priority = 4)
+    @Test(priority = 4,groups = "Regression")
     public void verifyUserRegistration() {
         String firstName = RandomDataUtility.getFirstName();
         String lastName = RandomDataUtility.getLastName();

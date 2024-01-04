@@ -11,18 +11,18 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 public class LoginPageTest extends Base {
-    @Test(priority = 5)
+    @Test(priority = 5,groups="Smoke")
     public void verifyLoginPageTitle()  {
 
         WebElement loginField = driver.findElement(By.xpath("//a[@class='ico-login']"));
         loginField.click();
         String actualpageTitle = driver.getTitle();
         ArrayList<String> data = ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH, Constants.LOGIN_PAGE);
-        String expectedResult = data.get(1);
+        String expectedResult = data.get(1)+"123";
         Assert.assertEquals(actualpageTitle, expectedResult, Messages.TITLE_MISMATCH);
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6,groups = {"Smoke","Regression"})
     public void verifyUserLogin() {
         WebElement loginField = driver.findElement(By.xpath("//a[@class='ico-login']"));
         loginField.click();
@@ -40,7 +40,7 @@ public class LoginPageTest extends Base {
     }
 
 
-    @Test(priority=7,dataProvider = "InvalidUserCredentials", dataProviderClass = DataProviders.class)
+    @Test(priority=7,dataProvider = "InvalidUserCredentials", dataProviderClass = DataProviders.class,groups = "Sanity")
     public void verifyUserLoginWithInvalidValidation(String username,String  password)  {
         WebElement loginField = driver.findElement(By.xpath("//a[@class='ico-login']"));
         loginField.click();

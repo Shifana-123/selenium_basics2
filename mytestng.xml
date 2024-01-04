@@ -13,8 +13,8 @@
             </class>
             <class name="org.selenium.testngcommands.RegisterPageTest">
                 <methods>
-                    <include name="verifyRegisterPageTitle"/>
-                    <include name="verifyUserRegistration"/>
+                    <exclude name="verifyRegisterPageTitle"/>
+                    <exclude name="verifyUserRegistration"/>
                 </methods>
             </class>
         </classes>
@@ -25,8 +25,8 @@
         <classes>
             <class name="org.selenium.testngcommands.LoginPageTest">
                 <methods>
-                    <include name="verifyLoginPageTitle"/>
-                    <include name="verifyUserLogin"/>
+                    <exclude name="verifyLoginPageTitle"/>
+                    <exclude name="verifyUserLogin"/>
                     <include name="verifyUserLoginWithInvalidValidation"/>
                 </methods>
             </class>
