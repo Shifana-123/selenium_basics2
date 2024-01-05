@@ -1,7 +1,7 @@
 package org.selenium.listeners;
 
+import org.selenium.retryanalyzer.RetryAnalyzer;
 import org.testng.IAnnotationTransformer;
-import org.testng.annotations.IFactoryAnnotation;
 import org.testng.annotations.ITestAnnotation;
 
 import java.lang.reflect.Constructor;

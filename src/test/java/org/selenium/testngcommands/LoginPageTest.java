@@ -1,16 +1,20 @@
 package org.selenium.testngcommands;
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.selenium.automationcore.Base;
 import org.selenium.constants.Constants;
 import org.selenium.constants.Messages;
 import org.selenium.dataprovider.DataProviders;
+import org.selenium.listeners.ExtentListener;
 import org.selenium.utilities.ExcelUtility;
+import org.selenium.utilities.WebElementUtility;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 public class LoginPageTest extends Base {
+    ThreadLocal<ExtentTest> extentTest = ExtentListener.getTestInstance();
     @Test(priority = 5,groups="Smoke")
     public void verifyLoginPageTitle()  {
 
@@ -25,7 +29,7 @@ public class LoginPageTest extends Base {
     @Test(priority = 6,groups = {"Smoke","Regression"})
     public void verifyUserLogin() {
         WebElement loginField = driver.findElement(By.xpath("//a[@class='ico-login']"));
-        loginField.click();
+        WebElementUtility.clickOnElement(loginField);
         WebElement emailField = driver.findElement(By.id("Email"));
         emailField.sendKeys("sshifana959@gmail.com");
         WebElement passwordField = driver.findElement(By.id("Password"));

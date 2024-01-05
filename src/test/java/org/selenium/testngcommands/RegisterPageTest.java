@@ -1,10 +1,12 @@
 package org.selenium.testngcommands;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.selenium.automationcore.Base;
 import org.selenium.constants.Constants;
 import org.selenium.constants.Messages;
+import org.selenium.listeners.ExtentListener;
 import org.selenium.utilities.ExcelUtility;
 import org.selenium.utilities.RandomDataUtility;
 import org.testng.Assert;
@@ -12,6 +14,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 
 public class RegisterPageTest extends Base {
+    ThreadLocal<ExtentTest> extentTest = ExtentListener.getTestInstance();
     @Test(priority = 3,groups = "Smoke")
     public void verifyRegisterPageTitle() {
         WebElement registerField = driver.findElement(By.xpath("//a[@class='ico-register']"));

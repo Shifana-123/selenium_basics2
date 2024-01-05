@@ -1,4 +1,4 @@
-package org.selenium.listeners;
+package org.selenium.retryanalyzer;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
