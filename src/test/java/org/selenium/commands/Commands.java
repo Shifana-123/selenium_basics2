@@ -430,7 +430,7 @@ public class Commands extends BrowserLaunch {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("timerAlertButton")));
         WebElement clickButton=driver.findElement(By.id("timerAlertButton"));
         clickButton.click();
-       // Thread.sleep(6000);
+        // Thread.sleep(6000);
         wait.until(ExpectedConditions.alertIsPresent());
         Alert alert=driver.switchTo().alert();
         alert.accept();

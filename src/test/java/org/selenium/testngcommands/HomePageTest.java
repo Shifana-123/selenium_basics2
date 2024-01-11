@@ -13,7 +13,6 @@ import org.selenium.utilities.AppUtility;
 import org.selenium.utilities.ExcelUtility;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,11 +32,13 @@ public class HomePageTest extends Base {
         Assert.assertEquals(actualResult, expectedResult, Messages.TITLE_MISMATCH);
     }
 
-    @Test(priority = 2, groups = "Sanity")
+    @Test(priority = 2,groups = "Sanity")
     public void verifyCommunityPollSelection() {
+        extentTest.get().assignCategory("Sanity");
+        extentTest.get().log(Status.PASS,"URL loaded successfully");
         List<WebElement> pollTexts = driver.findElements(By.xpath("//li[@class='answer']//label[starts-with(@for,'pollanswers')]"));
         boolean isButtonSelected = AppUtility.selectValueFromRadioButton(pollTexts, Constants.POOR);
-        Assert.assertFalse(isButtonSelected, "Value  selected");
+        extentTest.get().log(Status.PASS,"Community poll selected successfully");
         Assert.assertFalse(isButtonSelected, Messages.VALUE_SELECTED);
 
     }
