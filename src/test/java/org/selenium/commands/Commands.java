@@ -8,11 +8,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Array;
 import java.time.Duration;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
+
 import static org.testng.AssertJUnit.assertEquals;
 
 
@@ -471,6 +471,17 @@ public class Commands extends BrowserLaunch {
         driver.get("https://demo.guru99.com/popup.php");
         WebElement clickHereButton = driver.findElement(By.linkText("Click Here"));
         clickHereButton.click();
+    }
+    @Test
+    public void verifyTableData() {
+        driver.get("https://www.w3schools.com/html/html_tables.asp");
+        List<WebElement> tableData=driver.findElements(By.xpath("//table[@id='customers']//tbody//tr[2]//td"));
+        List<String> actualTableData=new ArrayList<>();
+        for(WebElement data:tableData) {
+            String value=data.getText();
+            actualTableData.add(value);
+        }
+        System.out.println(actualTableData);
     }
 
 

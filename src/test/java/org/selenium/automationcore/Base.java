@@ -8,9 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +47,30 @@ public class Base {
         TakesScreenshot takesScreenshot=(TakesScreenshot) driver;
         File screenshot=takesScreenshot.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(screenshot,new File("./Screenshots/"+result.getName()+".png"));
-
+    }
+    @BeforeSuite
+    public void beforeSuite() {
+        System.out.println("Connect the data base before the suite");
+    }
+    @AfterSuite
+    public void afterSuite() {
+        System.out.println("Disconnect data base after the suite");
+    }
+    @BeforeTest
+    public void beforeTest() {
+        System.out.println("Condition need to be run before the test run");
+    }
+    @AfterTest
+    public void afterTest() {
+        System.out.println("Condition need to be run after the test run");
+    }
+    @BeforeClass
+    public void beforeClass() {
+        System.out.println("Condition need to be run before each class run");
+    }
+    @AfterClass
+    public void afterClasss() {
+        System.out.println("Condition need to be run after each class run");
     }
 
 }

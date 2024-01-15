@@ -63,11 +63,11 @@ public class LoginPageTest extends Base {
         WebElement passwordField = driver.findElement(By.id("Password"));
         WebElementUtility.enterValue(passwordField,password);
         WebElement loginButton = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
-       WebElementUtility.clickOnElement(loginButton);
+        WebElementUtility.clickOnElement(loginButton);
         WebElement actualMessage = driver.findElement(By.xpath("//span[text()='Login was unsuccessful. Please correct the errors and try again.']"));
         String actualMessageText = WebElementUtility.getTextFromElement(actualMessage);
         String expectedMessageText = data.get(6);
-        Assert.assertEquals(actualMessageText, expectedMessageText, Messages.LOGIN_FAILED_WARNINGMESSAGE_NOTFOUND);
+        Assert.assertEquals(actualMessageText,expectedMessageText, Messages.LOGIN_FAILED_WARNINGMESSAGE_NOTFOUND);
     }
 
 }

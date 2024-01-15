@@ -13,7 +13,7 @@
             </class>
             <class name="org.selenium.testngcommands.RegisterPageTest">
                 <methods>
-                    <exclude name="verifyRegisterPageTitle"/>
+                    <include name="verifyRegisterPageTitle"/>
                     <exclude name="verifyUserRegistration"/>
                 </methods>
             </class>
